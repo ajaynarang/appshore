@@ -15,17 +15,12 @@ import { useInView } from 'react-intersection-observer';
 import {
   Mail,
   Phone,
-  MapPin,
   Send,
   MessageSquare,
-  Users,
-  Briefcase,
   HelpCircle,
   Rocket,
   CheckCircle2,
   Linkedin,
-  Twitter,
-  Github,
   Calendar,
   X
 } from 'lucide-react';
