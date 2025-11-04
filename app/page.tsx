@@ -46,7 +46,8 @@ const products = [
     color: 'from-purple-500 via-pink-500 to-rose-500',
     bgGradient: 'from-purple-50 to-pink-50',
     highlights: ['Subject-Aware AI', 'Hybrid Learning', 'Oopsies Rewards', 'Multi-Board Support'],
-    metrics: { users: '50K+', accuracy: '95%', satisfaction: '4.9/5' }
+    metrics: { users: '50K+', accuracy: '95%', satisfaction: '4.9/5' },
+    url: 'https://oopsilearn.appshore.in' // Update with your actual URL
   },
   {
     id: 'truck-pilot',
@@ -57,7 +58,8 @@ const products = [
     color: 'from-blue-500 via-cyan-500 to-teal-500',
     bgGradient: 'from-blue-50 to-cyan-50',
     highlights: ['AI Dispatch', 'Real-time Tracking', 'Load Optimization', 'Profit Intelligence'],
-    metrics: { efficiency: '+40%', savings: '$50K/yr', uptime: '99.9%' }
+    metrics: { efficiency: '+40%', savings: '$50K/yr', uptime: '99.9%' },
+    url: 'https://truckpilot.appshore.in' // Update with your actual URL
   },
   {
     id: 'tourna-x',
@@ -68,7 +70,8 @@ const products = [
     color: 'from-orange-500 via-red-500 to-pink-500',
     bgGradient: 'from-orange-50 to-red-50',
     highlights: ['Auto Fixtures', 'Player Rankings', 'Club Management', 'Quick Commerce'],
-    metrics: { tournaments: '1K+', players: '25K+', clubs: '500+' }
+    metrics: { tournaments: '1K+', players: '25K+', clubs: '500+' },
+    url: 'https://tournax.appshore.in' // Update with your actual URL
   },
   {
     id: 'parla',
@@ -79,7 +82,8 @@ const products = [
     color: 'from-green-500 via-emerald-500 to-teal-500',
     bgGradient: 'from-green-50 to-emerald-50',
     highlights: ['WhatsApp Native', 'Photo Menu OCR', 'Voice Orders', 'Smart Analytics'],
-    metrics: { businesses: '2K+', orders: '100K+', response: '<30s' }
+    metrics: { businesses: '2K+', orders: '100K+', response: '<30s' },
+    url: 'https://parla.appshore.in' // Update with your actual URL
   },
   {
     id: 'shelfy',
@@ -90,7 +94,8 @@ const products = [
     color: 'from-amber-500 via-yellow-500 to-orange-500',
     bgGradient: 'from-amber-50 to-yellow-50',
     highlights: ['Barcode Scanning', 'AI Recommendations', 'Reading Analytics', 'Cover Recognition'],
-    metrics: { books: '5M+', scans: '250K+', accuracy: '98%' }
+    metrics: { books: '5M+', scans: '250K+', accuracy: '98%' },
+    url: 'https://shelfy.appshore.in' // Update with your actual URL
   },
   {
     id: 'nexacart',
@@ -101,7 +106,8 @@ const products = [
     color: 'from-indigo-500 via-purple-500 to-pink-500',
     bgGradient: 'from-indigo-50 to-purple-50',
     highlights: ['AI Shopping Assistant', 'Visual Search', 'Smart Personalization', 'Voice Commerce'],
-    metrics: { conversion: '+85%', carts: '-60%', revenue: '+120%' }
+    metrics: { conversion: '+85%', carts: '-60%', revenue: '+120%' },
+    url: 'https://nexacart.appshore.in' // Update with your actual URL
   }
 ];
 
@@ -336,23 +342,25 @@ export default function Home() {
                               ))}
                             </div>
 
-                            {/* Metrics */}
-                            <div className="flex gap-6 mb-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            {/* Metrics - keept it commented for now do not remove it */}
+                            {/* <div className="flex gap-6 mb-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                               {Object.entries(product.metrics).map(([key, value]) => (
                                 <div key={key}>
                                   <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{value}</div>
                                   <div className="text-xs text-gray-500 dark:text-gray-400 capitalize">{key}</div>
                                 </div>
                               ))}
-                            </div>
+                            </div> */}
 
-                            <Button
-                              variant="ghost"
-                              className="group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:text-white transition-all duration-300 w-full dark:text-gray-300"
-                            >
-                              Learn More
-                              <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                            </Button>
+                            <a href={product.url} target="_blank" rel="noopener noreferrer" className="block w-full">
+                              <Button
+                                variant="ghost"
+                                className="group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:text-white transition-all duration-300 w-full dark:text-gray-300"
+                              >
+                                Visit Product
+                                <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                              </Button>
+                            </a>
                           </div>
                         </Card>
                       </HoverCardTrigger>
@@ -429,9 +437,14 @@ export default function Home() {
                 <ul className="space-y-2">
                   {products.slice(0, 4).map((product) => (
                     <li key={product.id}>
-                      <Link href={`/#${product.id}`} className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                      <a 
+                        href={product.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                      >
                         {product.name}
-                      </Link>
+                      </a>
                     </li>
                   ))}
                 </ul>

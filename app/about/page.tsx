@@ -193,27 +193,17 @@ export default function AboutPage() {
         {/* Mission & Vision */}
         <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-1 gap-12">
               <AnimatedSection>
                 <Card className="p-12 h-full border-2 hover:border-purple-200 hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-purple-50 to-pink-50">
                   <Target className="w-16 h-16 text-purple-600 mb-6" />
                   <h2 className="text-4xl font-bold mb-6 text-gray-900">Our Mission</h2>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    To democratize access to intelligent technology by building AI-powered solutions 
-                    that are intuitive, powerful, and accessible to everyone. We believe technology 
-                    should empower, not complicate.
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                  Technology should speak your language. We&apos;re democratizing digital experiences by making AI-powered interfaces that understand you whether you type, talk, or show. No learning curve. No technical barriers. Just natural interaction that puts the power of technology in everyone&apos;s hands. 
                   </p>
-                </Card>
-              </AnimatedSection>
-
-              <AnimatedSection>
-                <Card className="p-12 h-full border-2 hover:border-blue-200 hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-blue-50 to-cyan-50">
-                  <Eye className="w-16 h-16 text-blue-600 mb-6" />
-                  <h2 className="text-4xl font-bold mb-6 text-gray-900">Our Vision</h2>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    To be the world&apos;s most innovative AI product company, creating solutions that 
-                    transform industries, enrich lives, and push the boundaries of what&apos;s possible 
-                    with artificial intelligence.
+                  
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                  Everyone should be able to interact with digital tools as naturally as having a conversation with a neighbor.
                   </p>
                 </Card>
               </AnimatedSection>
