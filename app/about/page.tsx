@@ -123,10 +123,10 @@ export default function AboutPage() {
       <Navigation />
       <AnimatedGradient />
 
-      <main className="relative min-h-screen pt-20">
+      <main className="relative min-h-screen pt-20 bg-white dark:bg-gray-950">
         {/* Hero Section */}
         <section className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 opacity-50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-purple-950/20 dark:via-blue-950/20 dark:to-pink-950/20 opacity-50" />
           
           <div className="relative z-10 max-w-7xl mx-auto">
             <motion.div
@@ -141,7 +141,7 @@ export default function AboutPage() {
               </Badge>
 
               <h1 className="text-6xl sm:text-7xl md:text-8xl font-black mb-8 leading-tight">
-                <span className="bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 dark:from-gray-100 dark:via-purple-100 dark:to-blue-100 bg-clip-text text-transparent">
                   Building Tomorrow,
                 </span>
                 <br />
@@ -150,7 +150,7 @@ export default function AboutPage() {
                 </span>
               </h1>
 
-              <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12">
+              <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
                 We&apos;re a team of visionaries, engineers, and designers united by a single mission: 
                 to harness the power of AI to solve real-world problems and create products that truly matter.
               </p>
@@ -174,15 +174,15 @@ export default function AboutPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
           <AnimatedSection>
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {stats.map((stat, idx) => (
-                  <Card key={idx} className="p-8 text-center hover:shadow-xl transition-all duration-300 border-2 hover:border-purple-200">
-                    <stat.icon className="w-12 h-12 mx-auto mb-4 text-purple-600" />
-                    <div className="text-4xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                  <Card key={idx} className="p-8 text-center hover:shadow-xl transition-all duration-300 border-2 hover:border-purple-200 dark:hover:border-purple-800 bg-white dark:bg-gray-900">
+                    <stat.icon className="w-12 h-12 mx-auto mb-4 text-purple-600 dark:text-purple-400" />
+                    <div className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">{stat.value}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
                   </Card>
                 ))}
               </div>
@@ -191,18 +191,18 @@ export default function AboutPage() {
         </section>
 
         {/* Mission & Vision */}
-        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
+        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-1 gap-12">
               <AnimatedSection>
-                <Card className="p-12 h-full border-2 hover:border-purple-200 hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-purple-50 to-pink-50">
-                  <Target className="w-16 h-16 text-purple-600 mb-6" />
-                  <h2 className="text-4xl font-bold mb-6 text-gray-900">Our Mission</h2>
-                  <p className="text-xl text-gray-700 leading-relaxed">
-                  Technology should speak your language. We&apos;re democratizing digital experiences by making AI-powered interfaces that understand you whether you type, talk, or show. No learning curve. No technical barriers. Just natural interaction that puts the power of technology in everyone&apos;s hands. 
+                <Card className="p-12 h-full border-2 hover:border-purple-200 dark:hover:border-purple-800 hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 dark:bg-gray-900">
+                  <Target className="w-16 h-16 text-purple-600 dark:text-purple-400 mb-6" />
+                  <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">Our Mission</h2>
+                  <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Technology should speak your language. We&apos;re democratizing digital experiences by making AI-powered interfaces that understand you whether you type, talk, or show. No learning curve. No technical barriers. Just natural interaction that puts the power of technology in everyone&apos;s hands.
                   </p>
-                  
-                  <p className="text-xl text-gray-700 leading-relaxed">
+
+                  <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
                   Everyone should be able to interact with digital tools as naturally as having a conversation with a neighbor.
                   </p>
                 </Card>
@@ -212,18 +212,18 @@ export default function AboutPage() {
         </section>
 
         {/* Values */}
-        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
+        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
           <AnimatedSection>
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-20">
-                <Badge className="mb-6 px-4 py-2 bg-purple-100 text-purple-700 border-purple-200">
+                <Badge className="mb-6 px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800">
                   <Lightbulb className="w-4 h-4 mr-2" />
                   Core Values
                 </Badge>
-                <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
                   What Drives Us
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                   Our values are the compass that guides every decision, every line of code, and every product we build.
                 </p>
               </div>
@@ -231,12 +231,12 @@ export default function AboutPage() {
               <div className="grid md:grid-cols-2 gap-8">
                 {values.map((value, idx) => (
                   <AnimatedSection key={idx}>
-                    <Card className="p-8 h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-purple-200 group">
+                    <Card className="p-8 h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-purple-200 dark:hover:border-purple-800 bg-white dark:bg-gray-900 group">
                       <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${value.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                         <value.icon className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-2xl font-bold mb-4 text-gray-900">{value.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                      <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">{value.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{value.description}</p>
                     </Card>
                   </AnimatedSection>
                 ))}
@@ -246,15 +246,15 @@ export default function AboutPage() {
         </section>
 
         {/* Timeline */}
-        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
+        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
           <AnimatedSection>
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-20">
-                <Badge className="mb-6 px-4 py-2 bg-blue-100 text-blue-700 border-blue-200">
+                <Badge className="mb-6 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800">
                   <Zap className="w-4 h-4 mr-2" />
                   Our Journey
                 </Badge>
-                <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
                   The Road So Far
                 </h2>
               </div>
@@ -270,12 +270,12 @@ export default function AboutPage() {
                         <div className="absolute left-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center shadow-xl">
                           <item.icon className="w-8 h-8 text-white" />
                         </div>
-                        <Card className="p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-purple-200">
-                          <Badge className="mb-4 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 border-0">
+                        <Card className="p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-purple-200 dark:hover:border-purple-800 bg-white dark:bg-gray-900">
+                          <Badge className="mb-4 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/50 dark:to-pink-900/50 text-purple-700 dark:text-purple-300 border-0">
                             {item.year}
                           </Badge>
-                          <h3 className="text-2xl font-bold mb-3 text-gray-900">{item.title}</h3>
-                          <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-gray-100">{item.title}</h3>
+                          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{item.description}</p>
                         </Card>
                       </div>
                     </AnimatedSection>
@@ -287,18 +287,18 @@ export default function AboutPage() {
         </section>
 
         {/* Expertise */}
-        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
+        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
           <AnimatedSection>
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-20">
-                <Badge className="mb-6 px-4 py-2 bg-green-100 text-green-700 border-green-200">
+                <Badge className="mb-6 px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800">
                   <Brain className="w-4 h-4 mr-2" />
                   Technical Excellence
                 </Badge>
-                <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
                   Our Expertise
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                   World-class capabilities in cutting-edge technologies that power next-generation solutions.
                 </p>
               </div>
@@ -306,10 +306,10 @@ export default function AboutPage() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {expertise.map((skill, idx) => (
                   <AnimatedSection key={idx}>
-                    <Card className="p-6 hover:shadow-xl transition-all duration-300 border-2 hover:border-green-200 group">
+                    <Card className="p-6 hover:shadow-xl transition-all duration-300 border-2 hover:border-green-200 dark:hover:border-green-800 bg-white dark:bg-gray-900 group">
                       <div className="flex items-start gap-3">
-                        <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
-                        <span className="text-gray-900 font-medium">{skill}</span>
+                        <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" />
+                        <span className="text-gray-900 dark:text-gray-100 font-medium">{skill}</span>
                       </div>
                     </Card>
                   </AnimatedSection>
@@ -320,7 +320,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-pink-50">
+        <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 dark:bg-gray-900">
           <AnimatedSection>
             <div className="max-w-5xl mx-auto text-center">
               <Card className="p-16 border-0 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 shadow-2xl">
@@ -333,13 +333,13 @@ export default function AboutPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link href="/contact">
-                    <Button size="lg" className="rounded-full text-lg px-10 py-7  shadow-xl">
+                    <Button size="lg" className="rounded-full text-lg px-10 py-7 bg-white text-purple-600 hover:bg-gray-100 shadow-xl">
                       Get In Touch
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </Link>
                   <Link href="/#products">
-                    <Button size="lg" className="rounded-full text-lg px-10 py-7 border-2 border-white ">
+                    <Button size="lg" className="rounded-full text-lg px-10 py-7 border-2 border-white text-white hover:bg-white/10">
                       View Our Products
                       <Rocket className="ml-2 w-5 h-5" />
                     </Button>

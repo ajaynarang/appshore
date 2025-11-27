@@ -315,7 +315,7 @@ export default function Home() {
               </div>
 
               <div className="grid lg:grid-cols-2 gap-8">
-                {products.map((product) => (
+                {products.filter(p => ['oops-i-learn', 'parla', 'shelfy'].includes(p.id)).map((product) => (
                   <AnimatedSection key={product.id}>
                     <HoverCard>
                       <HoverCardTrigger asChild>
@@ -435,7 +435,7 @@ export default function Home() {
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4">Products</h3>
                 <ul className="space-y-2">
-                  {products.slice(0, 4).map((product) => (
+                  {products.filter(p => ['oops-i-learn', 'parla', 'shelfy'].includes(p.id)).map((product) => (
                     <li key={product.id}>
                       <a 
                         href={product.url} 
