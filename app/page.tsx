@@ -47,7 +47,8 @@ const products = [
     bgGradient: 'bg-secondary/30',
     highlights: ['Barcode Scanning', 'AI Recommendations', 'Reading Analytics', 'Cover Recognition'],
     metrics: { books: '5M+', scans: '250K+', accuracy: '98%' },
-    url: 'https://shelfy.appshore.in'
+    url: 'https://shelfy.appshore.in',
+    enabled: true
   },
   {
     id: 'oops-i-learn',
@@ -59,7 +60,8 @@ const products = [
     bgGradient: 'bg-secondary/30',
     highlights: ['Subject-Aware AI', 'Hybrid Learning', 'Oopsies Rewards', 'Multi-Board Support'],
     metrics: { users: '50K+', accuracy: '95%', satisfaction: '4.9/5' },
-    url: 'https://oopsilearn.appshore.in'
+    url: 'https://oopsilearn.appshore.in',
+    enabled: true
   },
   {
     id: 'truck-pilot',
@@ -71,7 +73,8 @@ const products = [
     bgGradient: 'bg-secondary/30',
     highlights: ['AI Dispatch', 'Real-time Tracking', 'Load Optimization', 'Profit Intelligence'],
     metrics: { efficiency: '+40%', savings: '$50K/yr', uptime: '99.9%' },
-    url: 'https://truckpilot.appshore.in'
+    url: 'https://truckpilot.appshore.in',
+    enabled: true
   },
   {
     id: 'tourna-x',
@@ -83,7 +86,8 @@ const products = [
     bgGradient: 'bg-secondary/30',
     highlights: ['Auto Fixtures', 'Player Rankings', 'Club Management', 'Quick Commerce'],
     metrics: { tournaments: '1K+', players: '25K+', clubs: '500+' },
-    url: 'https://tournax.appshore.in'
+    url: 'https://tournax.appshore.in',
+    enabled: false
   },
   {
     id: 'parla',
@@ -95,7 +99,8 @@ const products = [
     bgGradient: 'bg-secondary/30',
     highlights: ['WhatsApp Native', 'Photo Menu OCR', 'Voice Orders', 'Smart Analytics'],
     metrics: { businesses: '2K+', orders: '100K+', response: '<30s' },
-    url: 'https://parla.appshore.in'
+    url: 'https://parla.appshore.in',
+    enabled: true
   },
 
   {
@@ -108,7 +113,8 @@ const products = [
     bgGradient: 'bg-secondary/30',
     highlights: ['AI Shopping Assistant', 'Visual Search', 'Smart Personalization', 'Voice Commerce'],
     metrics: { conversion: '+85%', carts: '-60%', revenue: '+120%' },
-    url: 'https://nexacart.appshore.in'
+    url: 'https://nexacart.appshore.in',
+    enabled: false
   }
 ];
 
@@ -316,7 +322,7 @@ export default function Home() {
               </div>
 
               <div className="grid lg:grid-cols-2 gap-8">
-                {products.filter(p => ['oops-i-learn', 'parla', 'shelfy'].includes(p.id)).map((product) => (
+                {products.filter(p => p.enabled).map((product) => (
                   <AnimatedSection key={product.id}>
                     <HoverCard>
                       <HoverCardTrigger asChild>
@@ -436,7 +442,7 @@ export default function Home() {
               <div>
                 <h3 className="font-bold text-foreground mb-4">Products</h3>
                 <ul className="space-y-2">
-                  {products.filter(p => ['oops-i-learn', 'parla', 'shelfy'].includes(p.id)).map((product) => (
+                  {products.filter(p => p.enabled).map((product) => (
                     <li key={product.id}>
                       <a 
                         href={product.url} 
