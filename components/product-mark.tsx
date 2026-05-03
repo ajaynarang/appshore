@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
 
 export type ProductId = 'sally' | 'spec-nexus' | 'oops' | 'shelfy';
 
@@ -13,16 +14,16 @@ type Props = {
 const SVG_COMMON =
   'w-full max-w-md aspect-square text-foreground';
 
-export function ProductMark({ id, className = '' }: Props) {
+export function ProductMark({ id, className }: Props) {
   switch (id) {
     case 'sally':
-      return <SallyMark className={`${SVG_COMMON} ${className}`} />;
+      return <SallyMark className={cn(SVG_COMMON, className)} />;
     case 'spec-nexus':
-      return <SpecNexusMark className={`${SVG_COMMON} ${className}`} />;
+      return <SpecNexusMark className={cn(SVG_COMMON, className)} />;
     case 'oops':
-      return <OopsMark className={`${SVG_COMMON} ${className}`} />;
+      return <OopsMark className={cn(SVG_COMMON, className)} />;
     case 'shelfy':
-      return <ShelfyMark className={`${SVG_COMMON} ${className}`} />;
+      return <ShelfyMark className={cn(SVG_COMMON, className)} />;
   }
 }
 
@@ -38,7 +39,6 @@ function useDrawIn() {
    ────────────────────────────────────────────── */
 function SallyMark({ className }: { className?: string }) {
   const { ref, inView } = useDrawIn();
-  const pathLength = 600;
   return (
     <svg
       ref={ref}
@@ -57,9 +57,8 @@ function SallyMark({ className }: { className?: string }) {
       {/* Main route */}
       <motion.path
         d="M 20 150 Q 60 150 80 110 T 140 70 Q 165 55 180 30"
-        strokeDasharray={pathLength}
-        initial={{ strokeDashoffset: pathLength }}
-        animate={{ strokeDashoffset: inView ? 0 : pathLength }}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
         transition={{ duration: 1.4, ease: EASE, delay: 0.2 }}
       />
 
@@ -85,17 +84,15 @@ function SallyMark({ className }: { className?: string }) {
       {/* Branch lines */}
       <motion.line
         x1="100" y1="95" x2="100" y2="60"
-        strokeDasharray={50}
-        initial={{ strokeDashoffset: 50 }}
-        animate={{ strokeDashoffset: inView ? 0 : 50 }}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
         transition={{ duration: 0.6, delay: 1.4, ease: EASE }}
         opacity="0.4"
       />
       <motion.line
         x1="60" y1="150" x2="60" y2="180"
-        strokeDasharray={50}
-        initial={{ strokeDashoffset: 50 }}
-        animate={{ strokeDashoffset: inView ? 0 : 50 }}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
         transition={{ duration: 0.6, delay: 1.5, ease: EASE }}
         opacity="0.4"
       />
@@ -152,9 +149,8 @@ function SpecNexusMark({ className }: { className?: string }) {
         <motion.path
           key={i}
           d={c.d}
-          strokeDasharray={60}
-          initial={{ strokeDashoffset: 60 }}
-          animate={{ strokeDashoffset: inView ? 0 : 60 }}
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: inView ? 1 : 0 }}
           transition={{ duration: 0.6, delay: c.delay, ease: EASE }}
           opacity="0.5"
         />
@@ -168,7 +164,6 @@ function SpecNexusMark({ className }: { className?: string }) {
    ────────────────────────────────────────────── */
 function OopsMark({ className }: { className?: string }) {
   const { ref, inView } = useDrawIn();
-  const pathLength = 700;
   return (
     <svg
       ref={ref}
@@ -186,9 +181,8 @@ function OopsMark({ className }: { className?: string }) {
       {/* Path: forward, doubles back through loop, then forward again */}
       <motion.path
         d="M 20 100 L 70 100 Q 95 100 95 75 Q 95 50 75 50 Q 55 50 55 75 Q 55 100 80 110 L 130 110 Q 165 110 180 100"
-        strokeDasharray={pathLength}
-        initial={{ strokeDashoffset: pathLength }}
-        animate={{ strokeDashoffset: inView ? 0 : pathLength }}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
         transition={{ duration: 1.6, ease: EASE, delay: 0.2 }}
       />
 
@@ -259,9 +253,8 @@ function ShelfyMark({ className }: { className?: string }) {
       {/* Shelf line */}
       <motion.line
         x1="20" y1={shelfY} x2="180" y2={shelfY}
-        strokeDasharray={160}
-        initial={{ strokeDashoffset: 160 }}
-        animate={{ strokeDashoffset: inView ? 0 : 160 }}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
       />
     </svg>
