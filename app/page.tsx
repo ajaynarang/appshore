@@ -219,14 +219,20 @@ function SectionChapter({ product, index }: { product: Product; index: number })
             transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
             className="mt-10"
           >
-            <a
-              href={product.url}
-              target={product.url.startsWith('http') ? '_blank' : undefined}
-              rel={product.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="font-mono text-xs tracking-[0.2em] uppercase underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              Visit {product.visitLabel} →
-            </a>
+            {product.url === '#' ? (
+              <span className="font-mono text-xs tracking-[0.2em] uppercase text-muted-foreground cursor-default">
+                Coming soon
+              </span>
+            ) : (
+              <a
+                href={product.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs tracking-[0.2em] uppercase underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Visit {product.visitLabel} →
+              </a>
+            )}
           </motion.div>
         </div>
       </div>
@@ -254,7 +260,7 @@ function SectionColophon() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-          className="mt-12 text-center text-2xl md:text-3xl tracking-tight"
+          className="mt-12 text-center text-2xl md:text-3xl font-semibold tracking-tight"
         >
           Have something to build with us?
         </motion.h2>
@@ -292,14 +298,20 @@ function SectionColophon() {
             <ul className="mt-3 space-y-2">
               {PRODUCTS.map((p) => (
                 <li key={p.id}>
-                  <a
-                    href={p.url}
-                    target={p.url.startsWith('http') ? '_blank' : undefined}
-                    rel={p.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="text-sm hover:underline underline-offset-4"
-                  >
-                    {p.name}
-                  </a>
+                  {p.url === '#' ? (
+                    <span className="text-sm text-muted-foreground cursor-default">
+                      {p.name}
+                    </span>
+                  ) : (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm hover:underline underline-offset-4"
+                    >
+                      {p.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
