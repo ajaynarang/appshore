@@ -67,12 +67,89 @@ const PRODUCTS: Product[] = [
 
 const EASE = [0.25, 0.1, 0.25, 1] as const;
 
+function SectionMasthead() {
+  return (
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 lg:px-12">
+      <div className="w-full max-w-6xl mx-auto">
+        {/* Wordmark */}
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-center"
+        >
+          APPSHORE
+        </motion.h1>
+
+        {/* Thesis caption */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
+          className="mt-12 text-center font-mono text-xs md:text-sm tracking-[0.3em] uppercase text-muted-foreground"
+        >
+          Products by AppShore LLP.
+        </motion.p>
+
+        {/* Masthead rows */}
+        <div className="mt-32 border-t border-border">
+          {PRODUCTS.map((p, i) => (
+            <motion.a
+              key={p.id}
+              href={`#${p.id}`}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 1.1 + i * 0.08,
+                ease: EASE,
+              }}
+              className="group flex items-center gap-4 md:gap-8 py-5 md:py-6 border-b border-border hover:border-foreground transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground w-8 md:w-12 shrink-0">
+                {p.number}
+              </span>
+              <div className="flex-1 min-w-0">
+                <span className="block text-2xl md:text-4xl font-bold tracking-tight">
+                  {p.name}
+                </span>
+                <span className="md:hidden mt-1 block font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground">
+                  {p.hint}
+                </span>
+              </div>
+              <span className="hidden md:block font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {p.hint}
+              </span>
+              <span className="text-foreground transition-transform duration-300 group-hover:translate-x-1 shrink-0">
+                ↗
+              </span>
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Scroll cue */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4, y: [0, 4, 0] }}
+          transition={{
+            opacity: { duration: 1, delay: 1.7, ease: EASE },
+            y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2.7 },
+          }}
+          className="mt-16 text-center font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground"
+        >
+          Scroll ↓
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <>
       <Navigation />
       <main className="bg-background text-foreground">
-        {/* Masthead, chapters, and colophon land here in subsequent tasks */}
+        <SectionMasthead />
       </main>
     </>
   );
