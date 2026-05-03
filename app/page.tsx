@@ -37,9 +37,8 @@ const PRODUCTS: Product[] = [
     tagline: 'Governance for AI-native software teams.',
     body:
       'AI can write code in seconds. Enterprises still need to know who approved what, and why. Spec-Nexus sits between product intent and implementation — turning specifications into executable contracts, with approval gates, role-based ownership, and a clean trace from requirement to code. The speed of AI, with the rigor enterprises require.',
-    // TODO: replace with the real Spec-Nexus URL when available
-    url: '#',
-    visitLabel: 'spec-nexus',
+    url: 'https://spec-nexus.appshore.in',
+    visitLabel: 'spec-nexus.appshore.in',
   },
   {
     id: 'oops',
