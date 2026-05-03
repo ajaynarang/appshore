@@ -234,6 +234,106 @@ function SectionChapter({ product, index }: { product: Product; index: number })
   );
 }
 
+function SectionColophon() {
+  return (
+    <section className="relative min-h-[60vh] flex flex-col items-center justify-center px-6 lg:px-12 py-24 border-t border-border">
+      <div className="w-full max-w-6xl mx-auto">
+        {/* Closing block */}
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: EASE }}
+          className="text-center font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground"
+        >
+          Four products. One studio.
+        </motion.p>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+          className="mt-12 text-center text-2xl md:text-3xl tracking-tight"
+        >
+          Have something to build with us?
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
+          className="mt-10 flex justify-center"
+        >
+          <Link
+            href="/contact"
+            className="rounded-full px-8 py-4 bg-foreground text-background font-mono text-xs tracking-[0.15em] uppercase hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            Get in touch →
+          </Link>
+        </motion.div>
+
+        {/* Footer */}
+        <div className="mt-32 pt-12 border-t border-border grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+          <div>
+            <p className="font-mono text-xs tracking-[0.3em] uppercase">
+              AppShore LLP
+            </p>
+            <p className="mt-2 font-mono text-xs tracking-[0.2em] text-muted-foreground">
+              © 2026
+            </p>
+          </div>
+
+          <div>
+            <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground">
+              Products
+            </p>
+            <ul className="mt-3 space-y-2">
+              {PRODUCTS.map((p) => (
+                <li key={p.id}>
+                  <a
+                    href={p.url}
+                    target={p.url.startsWith('http') ? '_blank' : undefined}
+                    rel={p.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="text-sm hover:underline underline-offset-4"
+                  >
+                    {p.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground">
+              Company
+            </p>
+            <ul className="mt-3 space-y-2">
+              <li>
+                <Link
+                  href="/about"
+                  className="text-sm hover:underline underline-offset-4"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-sm hover:underline underline-offset-4"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -243,6 +343,7 @@ export default function Home() {
         {PRODUCTS.map((p, i) => (
           <SectionChapter key={p.id} product={p} index={i} />
         ))}
+        <SectionColophon />
       </main>
     </>
   );
