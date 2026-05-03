@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# Playwright MCP captures
+/.playwright-mcp/
+
 # next.js
 /.next/
 /out/

@@ -139,8 +139,8 @@ function SpecNexusMark({ className }: { className?: string }) {
         <motion.rect
           key={i}
           x={b.x} y={b.y} width={b.w} height={b.h}
-          initial={{ opacity: 0, y: b.y - 8 }}
-          animate={inView ? { opacity: 1, y: b.y } : { opacity: 0, y: b.y - 8 }}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: b.delay, ease: EASE }}
         />
       ))}
@@ -206,18 +206,32 @@ function OopsMark({ className }: { className?: string }) {
 }
 
 /* ──────────────────────────────────────────────
-   04 — Shelfy: a bookshelf as barcode
+   04 — Shelfy: a row of books that also reads as a barcode
    ────────────────────────────────────────────── */
 function ShelfyMark({ className }: { className?: string }) {
   const { ref, inView } = useDrawIn();
 
-  // Heights chosen to read like books on a shelf
+  // Mix of thin paperbacks and a few thicker hardcovers, varied heights.
+  // Widths add the book-shaped rhythm; varied heights preserve the barcode read.
   const books = [
-    { x: 30, h: 110 }, { x: 42, h: 90 }, { x: 54, h: 105 },
-    { x: 66, h: 80 },  { x: 78, h: 100 }, { x: 90, h: 115 },
-    { x: 102, h: 85 }, { x: 114, h: 95 }, { x: 126, h: 110 },
-    { x: 138, h: 75 }, { x: 150, h: 100 }, { x: 162, h: 90 },
+    { x: 28,  w: 7,  h: 105, detail: 'band' },
+    { x: 37,  w: 5,  h: 88 },
+    { x: 44,  w: 9,  h: 112, detail: 'band' },
+    { x: 55,  w: 6,  h: 78 },
+    { x: 63,  w: 7,  h: 98 },
+    { x: 72,  w: 11, h: 118, detail: 'hardcover' },
+    { x: 85,  w: 5,  h: 84 },
+    { x: 92,  w: 7,  h: 96, detail: 'band' },
+    { x: 101, w: 6,  h: 108 },
+    { x: 109, w: 10, h: 92, detail: 'hardcover' },
+    { x: 121, w: 5,  h: 102 },
+    { x: 128, w: 8,  h: 86, detail: 'band' },
+    { x: 138, w: 6,  h: 110 },
+    { x: 146, w: 9,  h: 78, detail: 'hardcover' },
+    { x: 157, w: 5,  h: 100 },
+    { x: 164, w: 7,  h: 90, detail: 'band' },
   ];
+
   const shelfY = 150;
 
   return (
@@ -228,34 +242,67 @@ function ShelfyMark({ className }: { className?: string }) {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.25"
-      strokeLinecap="square"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
       <rect x="8" y="8" width="184" height="184" stroke="currentColor" opacity="0.15" />
 
-      {books.map((b, i) => (
-        <motion.rect
-          key={i}
-          x={b.x}
-          y={shelfY - b.h}
-          width="8"
-          height={b.h}
-          initial={{ opacity: 0, y: shelfY - b.h + 12 }}
-          animate={
-            inView
-              ? { opacity: 1, y: shelfY - b.h }
-              : { opacity: 0, y: shelfY - b.h + 12 }
-          }
-          transition={{ duration: 0.4, delay: 0.2 + i * 0.05, ease: EASE }}
-        />
-      ))}
+      {books.map((b, i) => {
+        const top = shelfY - b.h;
+        return (
+          <motion.g
+            key={i}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 + i * 0.04, ease: EASE }}
+          >
+            {/* Book spine */}
+            <rect x={b.x} y={top} width={b.w} height={b.h} />
 
-      {/* Shelf line */}
+            {/* Title band — a horizontal stripe near the top of the spine */}
+            {b.detail === 'band' && (
+              <line
+                x1={b.x + 1}
+                y1={top + 14}
+                x2={b.x + b.w - 1}
+                y2={top + 14}
+                opacity="0.55"
+              />
+            )}
+
+            {/* Hardcover — double rule at top and bottom, the classic clothbound look */}
+            {b.detail === 'hardcover' && (
+              <>
+                <line x1={b.x + 1} y1={top + 6} x2={b.x + b.w - 1} y2={top + 6} opacity="0.55" />
+                <line x1={b.x + 1} y1={shelfY - 6} x2={b.x + b.w - 1} y2={shelfY - 6} opacity="0.55" />
+              </>
+            )}
+          </motion.g>
+        );
+      })}
+
+      {/* Shelf line — sits flush under all books */}
       <motion.line
         x1="20" y1={shelfY} x2="180" y2={shelfY}
         initial={{ pathLength: 0 }}
         animate={{ pathLength: inView ? 1 : 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
+      />
+
+      {/* Shelf supports — short verticals at each end, like a real shelf */}
+      <motion.line
+        x1="20" y1={shelfY} x2="20" y2={shelfY + 6}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.4, delay: 0.9, ease: EASE }}
+        opacity="0.6"
+      />
+      <motion.line
+        x1="180" y1={shelfY} x2="180" y2={shelfY + 6}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.4, delay: 0.9, ease: EASE }}
+        opacity="0.6"
       />
     </svg>
   );

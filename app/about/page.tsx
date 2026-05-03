@@ -10,15 +10,12 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 import {
   Target,
-  Eye,
   Heart,
   Users,
   Rocket,
   Brain,
-  Code,
   Globe,
   Zap,
-  Award,
   TrendingUp,
   Shield,
   Sparkles,
@@ -79,13 +76,6 @@ const timeline = [
     description: 'Scaling our solutions globally, touching millions of lives with intelligent technology.',
     icon: Globe
   }
-];
-
-const stats = [
-  { label: 'AI Products', value: '6+', icon: Brain },
-  { label: 'Industries Transformed', value: '5+', icon: Target },
-  { label: 'Innovation Score', value: '10/10', icon: Award },
-  { label: 'Code Quality', value: 'AAA', icon: Code }
 ];
 
 const expertise = [
@@ -171,23 +161,6 @@ export default function AboutPage() {
               </div>
             </motion.div>
           </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
-          <AnimatedSection>
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {stats.map((stat, idx) => (
-                  <Card key={idx} className="p-8 text-center hover:shadow-xl transition-all duration-300 border-2 hover:border-primary bg-card">
-                    <stat.icon className="w-12 h-12 mx-auto mb-4 text-primary" />
-                    <div className="text-4xl font-bold text-card-foreground mb-2">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
         </section>
 
         {/* Mission & Vision */}
