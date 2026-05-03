@@ -144,12 +144,105 @@ function SectionMasthead() {
   );
 }
 
+function SectionChapter({ product, index }: { product: Product; index: number }) {
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
+  const svgOnLeft = index % 2 === 0; // chapters 0 & 2 have SVG on the left (cols 1-5)
+  const total = PRODUCTS.length;
+
+  return (
+    <section
+      id={product.id}
+      ref={ref}
+      aria-labelledby={`${product.id}-name`}
+      className="relative min-h-screen flex items-center px-6 lg:px-12 py-32 border-t border-border"
+    >
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        {/* SVG */}
+        <div
+          className={`flex justify-center ${
+            svgOnLeft ? 'lg:col-span-5 lg:col-start-1' : 'lg:col-span-5 lg:col-start-8'
+          } ${svgOnLeft ? 'lg:order-1' : 'lg:order-2'} order-1`}
+        >
+          <ProductMark id={product.id} />
+        </div>
+
+        {/* Text block */}
+        <div
+          className={`${
+            svgOnLeft ? 'lg:col-span-6 lg:col-start-7' : 'lg:col-span-6 lg:col-start-1'
+          } ${svgOnLeft ? 'lg:order-2' : 'lg:order-1'} order-2`}
+        >
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground"
+          >
+            {product.number} / {String(total).padStart(2, '0')}
+          </motion.p>
+
+          <motion.h2
+            id={`${product.id}-name`}
+            initial={{ opacity: 0, filter: 'blur(12px)' }}
+            animate={
+              inView
+                ? { opacity: 1, filter: 'blur(0px)' }
+                : { opacity: 0, filter: 'blur(12px)' }
+            }
+            transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
+            className="mt-10 text-6xl sm:text-7xl md:text-8xl font-bold tracking-tighter leading-none"
+          >
+            {product.name}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
+            className="mt-6 text-lg md:text-xl text-muted-foreground"
+          >
+            {product.tagline}
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+            transition={{ duration: 0.7, delay: 0.45, ease: EASE }}
+            className="mt-12 text-base md:text-lg leading-relaxed max-w-xl"
+          >
+            {product.body}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+            transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
+            className="mt-10"
+          >
+            <a
+              href={product.url}
+              target={product.url.startsWith('http') ? '_blank' : undefined}
+              rel={product.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="font-mono text-xs tracking-[0.2em] uppercase underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Visit {product.visitLabel} →
+            </a>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <>
       <Navigation />
       <main className="bg-background text-foreground">
         <SectionMasthead />
+        {PRODUCTS.map((p, i) => (
+          <SectionChapter key={p.id} product={p} index={i} />
+        ))}
       </main>
     </>
   );
