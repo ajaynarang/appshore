@@ -129,14 +129,20 @@ When working on any page or component:
 ## Product Management
 
 ### Showing/Hiding Products
-Products can be hidden by filtering the `products` array before rendering. Current visibility:
-- **Active**: Parla, Shelfy
-- **Hidden** (commented out or filtered): Oops! I Learn, Truck Pilot, Tourna-X, NexaCart
+`app/page.tsx` defines `CATALOGUE` (every product, including retired ones) and derives
+`PRODUCTS = CATALOGUE.filter(p => !p.hidden)`. Everything on the page — masthead rows,
+chapters, chapter numbering, the footer list, and the "N products. One studio." line —
+renders from `PRODUCTS`, so these cannot drift apart.
 
-To hide/show products, filter the array in the map function:
-```tsx
-{products.filter(p => ['parla', 'shelfy'].includes(p.id)).map((product) => ...)}
-```
+Current visibility:
+- **Active**: Sally, Spec-Nexus, TournaX, Shelfy
+- **Hidden**: Oops! I Learn (`hidden: true`)
+
+To hide a product, add `hidden: true` to its entry; to show it again, remove the flag.
+Do not hardcode chapter numbers or the product count — both are computed.
+
+Each product also needs a matching SVG in `components/product-mark.tsx`, keyed by its
+`ProductId` (single-stroke line art on a 200×200 viewBox, drawn in on scroll).
 
 ### Footer Products
 The footer lists products - ensure it matches the visible products on the main page.

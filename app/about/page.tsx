@@ -61,13 +61,13 @@ const timeline = [
   {
     year: '2024',
     title: 'First Products',
-    description: 'Launched Oops! I Learn and Truck Pilot, revolutionizing education and fleet management.',
+    description: 'Launched Sally, an operating system for trucking fleets, and began building for the classroom.',
     icon: Rocket
   },
   {
     year: '2025',
     title: 'Expansion',
-    description: 'Introduced Tourna-X, Parla, Shelfy, and NexaCart, expanding our AI ecosystem.',
+    description: 'Introduced Spec-Nexus, TournaX, and Shelfy, expanding our AI ecosystem.',
     icon: TrendingUp
   },
   {

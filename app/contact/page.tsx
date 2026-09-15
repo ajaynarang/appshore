@@ -69,8 +69,12 @@ const inquiryTypes = [
 ];
 
 const socialLinks = [
-  { icon: Linkedin, label: 'LinkedIn', link: '#' },
-  { icon: X, label: 'X', link: '#' },
+  {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    link: 'https://www.linkedin.com/in/ajay-narang-769a779/',
+  },
+  { icon: X, label: 'X', link: 'https://x.com/crypticajay' },
 //   { icon: Github, label: 'Github', link: '#' }
 ];
 
@@ -372,9 +376,12 @@ export default function ContactPage() {
                         <a
                           key={idx}
                           href={social.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={social.label}
                           className={`w-12 h-12 rounded-xl bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300`}
                         >
-                          <social.icon className="w-5 h-5" />
+                          <social.icon className="w-5 h-5" aria-hidden="true" />
                         </a>
                       ))}
                     </div>

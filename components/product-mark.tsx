@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 
-export type ProductId = 'sally' | 'spec-nexus' | 'oops' | 'shelfy';
+export type ProductId = 'sally' | 'spec-nexus' | 'oops' | 'shelfy' | 'tournax';
 
 type Props = {
   id: ProductId;
@@ -24,6 +24,8 @@ export function ProductMark({ id, className }: Props) {
       return <OopsMark className={cn(SVG_COMMON, className)} />;
     case 'shelfy':
       return <ShelfyMark className={cn(SVG_COMMON, className)} />;
+    case 'tournax':
+      return <TournaxMark className={cn(SVG_COMMON, className)} />;
   }
 }
 
@@ -200,6 +202,108 @@ function OopsMark({ className }: { className?: string }) {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.3, delay: 1.7 }}
+      />
+    </svg>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   TournaX: a knockout bracket collapsing to one champion
+   ────────────────────────────────────────────── */
+function TournaxMark({ className }: { className?: string }) {
+  const { ref, inView } = useDrawIn();
+
+  // Eight entrants on the left, resolving right through three rounds.
+  // Seed y-positions are evenly spaced; each round averages its pair.
+  const seedYs = [24, 48, 72, 96, 120, 144, 168, 192].map((y) => y * 0.86 + 14);
+
+  // Round geometry: x where each round's brackets turn, and the x it feeds into.
+  const rounds = [
+    { from: 34, to: 76 },
+    { from: 76, to: 118 },
+    { from: 118, to: 160 },
+  ];
+
+  // Build the bracket rung-by-rung, halving the field each round.
+  let ys = seedYs;
+  const rungs: { d: string; round: number }[] = [];
+  rounds.forEach((r, roundIndex) => {
+    const next: number[] = [];
+    for (let i = 0; i < ys.length; i += 2) {
+      const [top, bottom] = [ys[i], ys[i + 1]];
+      const mid = (top + bottom) / 2;
+      // Two horizontal feeds + the vertical that joins them.
+      rungs.push({ d: `M ${r.from} ${top} L ${r.to} ${top}`, round: roundIndex });
+      rungs.push({ d: `M ${r.from} ${bottom} L ${r.to} ${bottom}`, round: roundIndex });
+      rungs.push({ d: `M ${r.to} ${top} L ${r.to} ${bottom}`, round: roundIndex });
+      next.push(mid);
+    }
+    ys = next;
+  });
+
+  const championY = ys[0];
+
+  return (
+    <svg
+      ref={ref}
+      className={className}
+      viewBox="0 0 200 200"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="8" y="8" width="184" height="184" stroke="currentColor" opacity="0.15" />
+
+      {/* Entrant dots */}
+      {seedYs.map((y, i) => (
+        <motion.circle
+          key={i}
+          cx="30"
+          cy={y}
+          r="2"
+          fill="currentColor"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+          transition={{ duration: 0.35, delay: 0.15 + i * 0.05, ease: EASE }}
+        />
+      ))}
+
+      {/* Bracket rungs — each round draws after the one that feeds it */}
+      {rungs.map((rung, i) => (
+        <motion.path
+          key={i}
+          d={rung.d}
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: inView ? 1 : 0 }}
+          transition={{
+            duration: 0.5,
+            delay: 0.6 + rung.round * 0.45,
+            ease: EASE,
+          }}
+          opacity={0.45 + rung.round * 0.18}
+        />
+      ))}
+
+      {/* Final feed to the champion */}
+      <motion.path
+        d={`M 160 ${championY} L 178 ${championY}`}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: 0.4, delay: 2.0, ease: EASE }}
+      />
+
+      {/* Champion — the one filled node the whole draw resolves into */}
+      <motion.circle
+        cx="178"
+        cy={championY}
+        r="4.5"
+        fill="currentColor"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+        transition={{ duration: 0.5, delay: 2.3, ease: EASE }}
       />
     </svg>
   );

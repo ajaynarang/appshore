@@ -8,19 +8,19 @@ import { ProductMark, type ProductId } from '@/components/product-mark';
 
 type Product = {
   id: ProductId;
-  number: string;
   name: string;
   hint: string;
   tagline: string;
   body: string;
   url: string;
   visitLabel: string;
+  /** Kept in the catalogue but not shown anywhere on the site. */
+  hidden?: boolean;
 };
 
-const PRODUCTS: Product[] = [
+const CATALOGUE: Product[] = [
   {
     id: 'sally',
-    number: '01',
     name: 'Sally',
     hint: 'Fleet AI',
     tagline: 'An operating system for trucking fleets.',
@@ -31,7 +31,6 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'spec-nexus',
-    number: '02',
     name: 'Spec-Nexus',
     hint: 'Governed AI development',
     tagline: 'Governance for AI-native software teams.',
@@ -41,8 +40,18 @@ const PRODUCTS: Product[] = [
     visitLabel: 'spec-nexus.appshore.in',
   },
   {
+    id: 'tournax',
+    name: 'TournaX',
+    hint: 'Tournament operations',
+    tagline: 'Run a tournament the way a federation would.',
+    body:
+      'Club and society tournaments run on group chats and paper draws — and the bracket falls apart by the quarter-finals. TournaX handles the whole event: entries with doubles partner invites, entry fees collected and verified, seeded knockout draws, and rally-by-rally scoring from a referee\'s phone that advances the winner and crowns the champion on its own. Badminton and table tennis today, more sports behind it.',
+    url: 'https://tournax.appshore.in',
+    visitLabel: 'tournax.appshore.in',
+  },
+  {
     id: 'oops',
-    number: '03',
+    hidden: true,
     name: 'Oops! I Learn',
     hint: 'Adaptive learning, K–12',
     tagline: 'A tutor that adapts to the child, not the syllabus.',
@@ -53,7 +62,6 @@ const PRODUCTS: Product[] = [
   },
   {
     id: 'shelfy',
-    number: '04',
     name: 'Shelfy',
     hint: 'Personal library intelligence',
     tagline: 'Your bookshelf, finally legible to software.',
@@ -63,6 +71,39 @@ const PRODUCTS: Product[] = [
     visitLabel: 'shelfy.appshore.in',
   },
 ];
+
+/**
+ * Everything on the page renders from this list, so numbering, the masthead,
+ * the footer and the product count can never drift out of sync when a product
+ * is hidden or added.
+ */
+const PRODUCTS = CATALOGUE.filter((p) => !p.hidden);
+
+/** Chapter number, derived from position: 1 → "01". */
+const numberOf = (index: number) => String(index + 1).padStart(2, '0');
+
+const COUNT_WORDS = [
+  'No',
+  'One',
+  'Two',
+  'Three',
+  'Four',
+  'Five',
+  'Six',
+  'Seven',
+  'Eight',
+  'Nine',
+] as const;
+
+const productCountLabel =
+  PRODUCTS.length === 1
+    ? 'One product. One studio.'
+    : `${COUNT_WORDS[PRODUCTS.length] ?? PRODUCTS.length} products. One studio.`;
+
+const SOCIALS = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ajay-narang-769a779/' },
+  { label: 'X', href: 'https://x.com/crypticajay' },
+] as const;
 
 const EASE = [0.25, 0.1, 0.25, 1] as const;
 
@@ -106,7 +147,7 @@ function SectionMasthead() {
               className="group flex items-center gap-4 md:gap-8 py-5 md:py-6 border-b border-border hover:border-foreground transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <span className="font-mono text-xs tracking-[0.3em] text-muted-foreground w-8 md:w-12 shrink-0">
-                {p.number}
+                {numberOf(i)}
               </span>
               <div className="flex-1 min-w-0">
                 <span className="block text-2xl md:text-4xl font-bold tracking-tight">
@@ -177,7 +218,7 @@ function SectionChapter({ product, index }: { product: Product; index: number })
             transition={{ duration: 0.7, ease: EASE }}
             className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground"
           >
-            {product.number} / {String(total).padStart(2, '0')}
+            {numberOf(index)} / {String(total).padStart(2, '0')}
           </motion.p>
 
           <motion.h2
@@ -251,7 +292,7 @@ function SectionColophon() {
           transition={{ duration: 0.7, ease: EASE }}
           className="text-center font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground"
         >
-          Four products. One studio.
+          {productCountLabel}
         </motion.p>
 
         <motion.h2
@@ -288,6 +329,20 @@ function SectionColophon() {
             <p className="mt-2 font-mono text-xs tracking-[0.2em] text-muted-foreground">
               © 2026
             </p>
+            <ul className="mt-6 flex gap-4">
+              {SOCIALS.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors underline-offset-4 hover:underline"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
