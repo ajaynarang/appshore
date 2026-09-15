@@ -42,10 +42,10 @@ const CATALOGUE: Product[] = [
   {
     id: 'tournax',
     name: 'TournaX',
-    hint: 'Tournament operations',
-    tagline: 'Run a tournament the way a federation would.',
+    hint: 'Multi-sport tournaments',
+    tagline: 'One tournament. Fourteen sports.',
     body:
-      'Club and society tournaments run on group chats and paper draws — and the bracket falls apart by the quarter-finals. TournaX handles the whole event: entries with doubles partner invites, entry fees collected and verified, seeded knockout draws, and rally-by-rally scoring from a referee\'s phone that advances the winner and crowns the champion on its own. Badminton and table tennis today, more sports behind it.',
+      'Club and society tournaments run on group chats and paper draws — and the bracket falls apart by the quarter-finals. TournaX runs the whole event: entries and partner invites, fees collected and verified, seeded draws, and scoring from a referee\'s phone that advances winners and crowns the champion on its own. And it knows the difference between sports — a chess game ends ½-½, cricket is played by teams on a ground, and a road race has a start list and a gun time instead of a bracket. Fourteen sports, one event.',
     url: 'https://tournax.appshore.in',
     visitLabel: 'tournax.appshore.in',
   },
