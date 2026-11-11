@@ -70,6 +70,16 @@ const CATALOGUE: Product[] = [
     url: 'https://shelfy.appshore.in',
     visitLabel: 'shelfy.appshore.in',
   },
+  {
+    id: 'hydrobook',
+    name: 'HydroBook',
+    hint: 'Books for testing stations',
+    tagline: 'Every branch, every rupee, one book.',
+    body:
+      'A CNG cylinder testing station runs on cash, credit and a notebook nobody reads twice. HydroBook replaces the notebook. The counter types it the way they say it — “chai 60”, “diesel 500 upi” — in English or Hinglish, and it becomes an entry in seconds. Jobs carry the vehicle and the cylinders tested; collections come off a party\'s udhaar. The owner sees profit, cash and dues for every branch on one screen, nothing is ever deleted, and the accountant still gets Excel.',
+    url: 'https://hydrobook.appshore.in',
+    visitLabel: 'hydrobook.appshore.in',
+  },
 ];
 
 /**

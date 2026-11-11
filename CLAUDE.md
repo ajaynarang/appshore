@@ -135,7 +135,7 @@ chapters, chapter numbering, the footer list, and the "N products. One studio." 
 renders from `PRODUCTS`, so these cannot drift apart.
 
 Current visibility:
-- **Active**: Sally, Spec-Nexus, TournaX, Shelfy
+- **Active**: Sally, Spec-Nexus, TournaX, Shelfy, HydroBook
 - **Hidden**: Oops! I Learn (`hidden: true`)
 
 To hide a product, add `hidden: true` to its entry; to show it again, remove the flag.

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 
-export type ProductId = 'sally' | 'spec-nexus' | 'oops' | 'shelfy' | 'tournax';
+export type ProductId = 'sally' | 'spec-nexus' | 'oops' | 'shelfy' | 'tournax' | 'hydrobook';
 
 type Props = {
   id: ProductId;
@@ -26,6 +26,8 @@ export function ProductMark({ id, className }: Props) {
       return <ShelfyMark className={cn(SVG_COMMON, className)} />;
     case 'tournax':
       return <TournaxMark className={cn(SVG_COMMON, className)} />;
+    case 'hydrobook':
+      return <HydrobookMark className={cn(SVG_COMMON, className)} />;
   }
 }
 
@@ -407,6 +409,94 @@ function ShelfyMark({ className }: { className?: string }) {
         animate={inView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.4, delay: 0.9, ease: EASE }}
         opacity="0.6"
+      />
+    </svg>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   HydroBook: a test cylinder whose body is a ledger page
+   ────────────────────────────────────────────── */
+function HydrobookMark({ className }: { className?: string }) {
+  const { ref, inView } = useDrawIn();
+
+  // Ruled entries inside the cylinder, each a different length like real amounts.
+  const rows = [
+    { y: 82, w: 44 },
+    { y: 100, w: 30 },
+    { y: 118, w: 40 },
+    { y: 136, w: 24 },
+    { y: 154, w: 18 },
+  ];
+
+  return (
+    <svg
+      ref={ref}
+      className={className}
+      viewBox="0 0 200 200"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="8" y="8" width="184" height="184" stroke="currentColor" opacity="0.15" />
+
+      {/* Handwheel */}
+      <motion.circle
+        cx="100"
+        cy="26"
+        r="7"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+      />
+
+      {/* Valve block with its side outlet */}
+      <motion.path
+        d="M 100 33 L 100 38 M 94 38 L 106 38 L 106 50 L 94 50 Z M 106 43 L 116 43 L 116 39"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+      />
+
+      {/* Cylinder body: domed shoulder, straight walls, rounded base */}
+      <motion.path
+        d="M 94 50 C 70 52 62 62 62 76 L 62 166 C 62 176 70 182 80 182 L 120 182 C 130 182 138 176 138 166 L 138 76 C 138 62 130 52 106 50"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: 1.1, delay: 0.4, ease: EASE }}
+      />
+
+      {/* Margin rule, as on a ledger page */}
+      <motion.path
+        d="M 78 70 L 78 170"
+        opacity={0.35}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: 0.6, delay: 1.3, ease: EASE }}
+      />
+
+      {/* Entries, written one after another */}
+      {rows.map((r, i) => (
+        <motion.path
+          key={r.y}
+          d={`M 86 ${r.y} L ${86 + r.w} ${r.y}`}
+          opacity={0.6}
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: inView ? 1 : 0 }}
+          transition={{ duration: 0.35, delay: 1.5 + i * 0.18, ease: EASE }}
+        />
+      ))}
+
+      {/* The tick: the day balances */}
+      <motion.path
+        d="M 112 154 L 118 160 L 130 146"
+        strokeWidth="1.75"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: 0.4, delay: 2.5, ease: EASE }}
       />
     </svg>
   );
