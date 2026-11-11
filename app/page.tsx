@@ -114,6 +114,7 @@ const productCountLabel =
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ajay-narang-769a779/' },
   { label: 'X', href: 'https://x.com/crypticajay' },
+  { label: 'Founder', href: 'https://ajay.narang.page' },
 ] as const;
 
 const EASE = [0.25, 0.1, 0.25, 1] as const;

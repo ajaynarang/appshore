@@ -14,16 +14,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useInView } from 'react-intersection-observer';
 import {
   Mail,
-  Phone,
+  UserRound,
+  Globe,
+  Calendar,
   Send,
   MessageSquare,
   HelpCircle,
   Rocket,
   CheckCircle2,
   Linkedin,
-  Calendar,
-  X
 } from 'lucide-react';
+
+const FOUNDER_URL = 'https://ajay.narang.page';
+
+/** The X (formerly Twitter) logo; lucide's `X` is a close icon, not the brand mark. */
+function XLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
 const contactMethods = [
   {
@@ -35,12 +46,12 @@ const contactMethods = [
     color: 'bg-primary'
   },
   {
-    icon: Phone,
-    title: 'Call Us',
-    description: 'Mon-Fri from 9am to 6pm',
-    value: '+91 (XXX) XXX-XXXX',
-    link: 'tel:+91XXXXXXXXXX',
-    color: 'bg-accent'
+    icon: UserRound,
+    title: 'Meet the Founder',
+    description: 'Ajay Narang, founder of AppShore',
+    value: 'ajay.narang.page',
+    link: FOUNDER_URL,
+    color: 'bg-primary'
   },
 //   {
 //     icon: MapPin,
@@ -74,7 +85,8 @@ const socialLinks = [
     label: 'LinkedIn',
     link: 'https://www.linkedin.com/in/ajay-narang-769a779/',
   },
-  { icon: X, label: 'X', link: 'https://x.com/crypticajay' },
+  { icon: XLogo, label: 'X', link: 'https://x.com/crypticajay' },
+  { icon: Globe, label: 'Ajay Narang, founder', link: FOUNDER_URL },
 //   { icon: Github, label: 'Github', link: '#' }
 ];
 
@@ -186,6 +198,9 @@ export default function ContactPage() {
                   <motion.a
                     key={idx}
                     href={method.link}
+                    {...(method.link.startsWith('http')
+                      ? { target: '_blank', rel: 'noopener noreferrer' }
+                      : {})}
                     whileHover={{ y: -8 }}
                     transition={{ duration: 0.3 }}
                   >
