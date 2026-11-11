@@ -67,7 +67,7 @@ const timeline = [
   {
     year: '2025',
     title: 'Expansion',
-    description: 'Introduced Spec-Nexus, TournaX, Shelfy and HydroBook, expanding our AI ecosystem.',
+    description: 'Introduced Throughline, TournaX, Shelfy and HydroBook, expanding our AI ecosystem.',
     icon: TrendingUp
   },
   {

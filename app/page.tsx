@@ -30,14 +30,15 @@ const CATALOGUE: Product[] = [
     visitLabel: 'sally.appshore.in',
   },
   {
-    id: 'spec-nexus',
-    name: 'Spec-Nexus',
-    hint: 'Governed AI development',
-    tagline: 'Governance for AI-native software teams.',
+    id: 'throughline',
+    name: 'Throughline',
+    hint: 'Governed AI delivery',
+    tagline: 'From ticket to production. Governed.',
     body:
-      'AI can write code in seconds. Enterprises still need to know who approved what, and why. Spec-Nexus sits between product intent and implementation — turning specifications into executable contracts, with approval gates, role-based ownership, and a clean trace from requirement to code. The speed of AI, with the rigor enterprises require.',
+      'AI made the solo developer 10×. It left the team behind. Throughline is the AI workspace for how enterprises actually ship: AI drafts every spec, design, plan and change on the organization’s own rules, and a named human signs each gate — authors can’t approve their own work. The board, the standup and the change record build themselves from the real pipeline, and one unbroken thread runs from the first ticket to the deployed commit. When the auditor asks who approved this and why, the answer is one click, not a week of archaeology.',
+    // Points at the live Spec-Nexus site until Throughline is hosted.
     url: 'https://spec-nexus.appshore.in',
-    visitLabel: 'spec-nexus.appshore.in',
+    visitLabel: 'Throughline',
   },
   {
     id: 'tournax',

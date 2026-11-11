@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 
-export type ProductId = 'sally' | 'spec-nexus' | 'oops' | 'shelfy' | 'tournax' | 'hydrobook';
+export type ProductId = 'sally' | 'throughline' | 'oops' | 'shelfy' | 'tournax' | 'hydrobook';
 
 type Props = {
   id: ProductId;
@@ -18,8 +18,8 @@ export function ProductMark({ id, className }: Props) {
   switch (id) {
     case 'sally':
       return <SallyMark className={cn(SVG_COMMON, className)} />;
-    case 'spec-nexus':
-      return <SpecNexusMark className={cn(SVG_COMMON, className)} />;
+    case 'throughline':
+      return <ThroughlineMark className={cn(SVG_COMMON, className)} />;
     case 'oops':
       return <OopsMark className={cn(SVG_COMMON, className)} />;
     case 'shelfy':
@@ -105,26 +105,30 @@ function SallyMark({ className }: { className?: string }) {
 }
 
 /* ──────────────────────────────────────────────
-   02 — Spec-Nexus: linked geometric blocks
+   Throughline: one thread from ticket to deploy,
+   sealed at every gate a named human signs
    ────────────────────────────────────────────── */
-function SpecNexusMark({ className }: { className?: string }) {
+function ThroughlineMark({ className }: { className?: string }) {
   const { ref, inView } = useDrawIn();
 
-  const blocks = [
-    { x: 30, y: 30, w: 50, h: 30, delay: 0.2 },
-    { x: 120, y: 30, w: 50, h: 30, delay: 0.35 },
-    { x: 30, y: 90, w: 50, h: 30, delay: 0.5 },
-    { x: 120, y: 90, w: 50, h: 30, delay: 0.65 },
-    { x: 75, y: 145, w: 50, h: 30, delay: 0.8 },
+  // Intake → Spec → Design → Plan → Code → Review → Deploy.
+  // Gated stages carry a seal; Intake and Code are run, not signed.
+  const stages = [
+    { x: 28, y: 110, gated: false },
+    { x: 52, y: 84, gated: true },
+    { x: 76, y: 116, gated: true },
+    { x: 100, y: 88, gated: true },
+    { x: 124, y: 120, gated: false },
+    { x: 148, y: 90, gated: true },
+    { x: 172, y: 100, gated: true },
   ];
 
-  const connectors = [
-    { d: 'M 80 45 L 120 45', delay: 1.0 },
-    { d: 'M 55 60 L 55 90', delay: 1.1 },
-    { d: 'M 145 60 L 145 90', delay: 1.2 },
-    { d: 'M 55 120 L 80 145', delay: 1.3 },
-    { d: 'M 145 120 L 120 145', delay: 1.4 },
-  ];
+  const thread =
+    'M 28 110 C 38 96 42 84 52 84 S 66 116 76 116 S 90 88 100 88 ' +
+    'S 114 120 124 120 S 138 90 148 90 S 164 100 172 100';
+
+  const THREAD_DELAY = 0.2;
+  const THREAD_DURATION = 1.8;
 
   return (
     <svg
@@ -135,30 +139,58 @@ function SpecNexusMark({ className }: { className?: string }) {
       stroke="currentColor"
       strokeWidth="1.25"
       strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
       <rect x="8" y="8" width="184" height="184" stroke="currentColor" opacity="0.15" />
 
-      {blocks.map((b, i) => (
-        <motion.rect
-          key={i}
-          x={b.x} y={b.y} width={b.w} height={b.h}
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5, delay: b.delay, ease: EASE }}
-        />
-      ))}
+      {/* The thread itself, drawn once, end to end */}
+      <motion.path
+        d={thread}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: THREAD_DURATION, delay: THREAD_DELAY, ease: EASE }}
+      />
 
-      {connectors.map((c, i) => (
-        <motion.path
-          key={i}
-          d={c.d}
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: inView ? 1 : 0 }}
-          transition={{ duration: 0.6, delay: c.delay, ease: EASE }}
-          opacity="0.5"
-        />
-      ))}
+      {/* Each stage lands as the thread reaches it */}
+      {stages.map((st, i) => {
+        const delay = THREAD_DELAY + (THREAD_DURATION * i) / (stages.length - 1);
+        return st.gated ? (
+          <motion.g
+            key={i}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+            transition={{ duration: 0.35, delay, ease: EASE }}
+            style={{ transformOrigin: `${st.x}px ${st.y}px` }}
+          >
+            {/* Seal: a ring with a signed centre */}
+            <circle cx={st.x} cy={st.y} r="6.5" className="fill-background" />
+            <circle cx={st.x} cy={st.y} r="2.5" fill="currentColor" stroke="none" />
+          </motion.g>
+        ) : (
+          <motion.circle
+            key={i}
+            cx={st.x}
+            cy={st.y}
+            r="2.75"
+            className="fill-background"
+            opacity={0.6}
+            initial={{ scale: 0 }}
+            animate={{ scale: inView ? 1 : 0 }}
+            transition={{ duration: 0.3, delay, ease: EASE }}
+            style={{ transformOrigin: `${st.x}px ${st.y}px` }}
+          />
+        );
+      })}
+
+      {/* The thread ends at a commit, not a shrug */}
+      <motion.path
+        d="M 172 100 L 172 140 M 166 140 L 178 140"
+        opacity={0.5}
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: inView ? 1 : 0 }}
+        transition={{ duration: 0.4, delay: THREAD_DELAY + THREAD_DURATION + 0.2, ease: EASE }}
+      />
     </svg>
   );
 }
