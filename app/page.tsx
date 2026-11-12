@@ -36,9 +36,8 @@ const CATALOGUE: Product[] = [
     tagline: 'From ticket to production. Governed.',
     body:
       'AI made the solo developer 10×. It left the team behind. Throughline is the AI workspace for how enterprises actually ship: AI drafts every spec, design, plan and change on the organization’s own rules, and a named human signs each gate — authors can’t approve their own work. The board, the standup and the change record build themselves from the real pipeline, and one unbroken thread runs from the first ticket to the deployed commit. When the auditor asks who approved this and why, the answer is one click, not a week of archaeology.',
-    // Points at the live Spec-Nexus site until Throughline is hosted.
-    url: 'https://spec-nexus.appshore.in',
-    visitLabel: 'Throughline',
+    url: 'https://throughline.appshore.in',
+    visitLabel: 'throughline.appshore.in',
   },
   {
     id: 'tournax',
